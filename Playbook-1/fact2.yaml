@@ -1,0 +1,7 @@
+---
+- hosts: demo
+  tasks:
+    - name: print OS Family
+      command: echo {{ansible_os_family}}
+      register: gather
+    - debug: var=gather.stdout
