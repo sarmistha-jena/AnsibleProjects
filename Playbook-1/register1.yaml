@@ -1,6 +1,6 @@
 ---
 - hosts: demo
-  task:
+  tasks:
     - name: print
       command: echo SARA
       register: output
