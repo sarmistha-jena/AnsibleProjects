@@ -32,7 +32,7 @@ resource "local_file" "ansible_inventory" {
   content = templatefile("./templates/hosts.tpl",
     {
       keyfile     = var.pemFile
-      demoservers = aws_instance.ansible_node.*.public_ip
+      demoservers = aws_instance.ansible_node.*.private_ip
     })
   filename = "./ansible/host.cfg"
 }
