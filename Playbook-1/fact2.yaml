@@ -4,4 +4,8 @@
     - name: print OS Family
       command: echo {{ansible_os_family}}
       register: gather
+    - name: print OS Family
+      command: echo {{ansible_nodename}}
+      register: gather2
     - debug: var=gather.stdout
+    - debug: var=gather2.stdout
