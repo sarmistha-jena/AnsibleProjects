@@ -1,5 +1,5 @@
 ---
-- host: demo
+- hosts: demo
   task:
     - name: print
       command: echo SARA
