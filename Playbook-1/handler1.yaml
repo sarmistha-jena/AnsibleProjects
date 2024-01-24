@@ -1,0 +1,15 @@
+---
+- hosts: demo
+  become: yes
+  tasks:
+    - name: Install apache
+      package: name=apache2 state=present
+      notify: Restart Server
+    - name: Start Apache
+      service: name=apache2 state=started
+      notify: Restart Server2
+  handlers:
+    - name: Restart Server
+      command: echo "reboot"
+    - name: Restart Server2
+      command: echo "reboot -2"
