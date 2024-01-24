@@ -1,0 +1,14 @@
+---
+- hosts: demo
+  vars:
+    myname: Sarmistha
+  tasks:
+    - name: print name
+      command: echo {{myname}}
+      register: output
+    - name: set fact variable
+      set_fact: testvar={{output.stdout}}
+    - name: Create file
+      file:
+        path: /tmp/{{testvar}}
+        state: touch

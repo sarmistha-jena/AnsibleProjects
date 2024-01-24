@@ -1,0 +1,10 @@
+---
+- host: demo
+  task:
+    - name: print
+      command: echo SARA
+      register: output
+    - debug: var=output
+    - debug: var=output.stdout
+    - debug: var=output.rc
+

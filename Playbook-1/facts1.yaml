@@ -1,0 +1,14 @@
+--- # Print Ansible_Facts variables
+- hosts: demo
+  tasks:
+    - name: print ansible facts
+      debug:
+        var: ansible_facts
+
+---
+- hosts: demo
+  tasks:
+    - name: print OS Family
+      command: echo {{ansible_os_family}}
+      register: gather
+    - debug: var=gather.stdout

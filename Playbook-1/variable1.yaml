@@ -1,0 +1,14 @@
+---
+- hosts: demo
+  become: yes
+  vars:
+    pkg: apache2
+    stp: present
+    sts: started
+  tasks:
+    - name: Install apache
+      package: name={{pkg}} state={{stp}}
+    - name: Start Apache
+      service: name={{pkg}} state={{sts}}
+
+#ansible-playbook variable1.yaml -e "sts=stopped" "stp=absent"
