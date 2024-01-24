@@ -4,4 +4,3 @@
     - name: print ansible facts
       debug:
         var: ansible_facts
----
