@@ -5,10 +5,10 @@
     - name: Print message
       debug:
         msg: "The item is" {{item}}
-        loop:
-          - hello
-          - World
-          - from
-          - Sara
-        loop_control:
+      loop:
+        - hello
+        - World
+        - from
+        - Sara
+      loop_control:
           pause: 5
