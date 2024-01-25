@@ -1,6 +1,6 @@
 ---
 - hosts: node01
-  gather_fact: false
+  gather_facts: false
   vars:
     - state: present
   tasks:

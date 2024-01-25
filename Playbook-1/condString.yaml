@@ -1,5 +1,5 @@
 - hosts: node01
-  gather_fact: false
+  gather_facts: false
   #become: yes
   tasks:
     - name: Run if Ubuntu
