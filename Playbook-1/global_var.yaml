@@ -1,5 +1,6 @@
 ---
-- hosts: demo
+#- hosts: demo
+- hosts: node01
   tasks:
     - name: print value
       command: echo {{myname}}
