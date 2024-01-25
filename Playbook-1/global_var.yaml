@@ -1,0 +1,7 @@
+---
+- hosts: demo
+  tasks:
+    - name: print value
+      command: echo {{myname}}
+      register: output
+    - debug: var=output.stdout
