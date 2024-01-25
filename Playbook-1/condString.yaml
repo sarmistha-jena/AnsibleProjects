@@ -1,6 +1,6 @@
 - hosts: node01
   gather_facts: false
-  #become: yes
+  become: yes
   tasks:
     - name: Run if Ubuntu
       command: echo "Its Ubuntu"
