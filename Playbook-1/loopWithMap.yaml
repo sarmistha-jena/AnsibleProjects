@@ -1,0 +1,18 @@
+---
+- hosts: node02
+  gather_fact: false
+  vars:
+    - state: present
+  tasks:
+    - name: Create Group
+      group: name={{item}} state={{state}}
+      loop:
+        - devops
+        - pets
+    - name: Create User
+      user: name={{item.name}} group={{item.groups}} state={{state}}
+      loop:
+        - { name: "sarmistha", groups: "devops" }
+        - { name: "hira", groups: "pets"}
+    - name: End of Task
+      command: echo EOT

@@ -1,0 +1,17 @@
+---
+- hosts: node01
+  gather_fact: false
+  vars:
+    - state: present
+  tasks:
+    - name: Create User
+      user: name={{item}} state={{state}}
+      loop:
+        - sara
+        - mukti
+        - madhia
+        - devops
+        - tommy
+        - jerry
+    - name: End of Task
+      command: echo EOT

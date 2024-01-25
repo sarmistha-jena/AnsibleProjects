@@ -1,0 +1,9 @@
+- hosts: node01
+  tasks:
+    - name: Get stats
+      stat: path=/tmp/dummyfile
+      register: st                 # st.stat.exists
+    - debug: var=st
+    - name: Create file
+      command: touch /tmp/dummyfile
+      when: not st.stat.exists

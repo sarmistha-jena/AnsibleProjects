@@ -1,0 +1,10 @@
+- hosts: node01
+  gather_fact: false
+  #become: yes
+  tasks:
+    - name: Run if Ubuntu
+      command: echo "Its Ubuntu"
+      when: ansible_os_family == "Debian"
+    - name: Run if Centos
+      command: echo "Its Centos"
+      when: ansible_os_family == "RedHat"

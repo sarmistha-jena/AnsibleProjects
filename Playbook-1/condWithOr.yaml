@@ -1,0 +1,10 @@
+---
+- hosts: node03
+  become: yes
+  tasks:
+    - name: Run if Ubuntu
+      command: echo "Its Ubuntu"
+      when: ansible_os_family == "Debian" or ansible_pkg_mgr == "yum"
+    - name: Run if Centos
+      command: echo "Its Centos"
+      when: ansible_os_family == "RedHat"
