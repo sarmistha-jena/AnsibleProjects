@@ -1,6 +1,8 @@
 ---
 #- hosts: demo
 - hosts: node01
+  vars :
+    myname = I_am_from_local
   tasks:
     - name: print value
       command: echo {{myname}}
