@@ -1,0 +1,8 @@
+#####################
+# LAMP on Ubuntu 20 #
+#####################
+---
+- hosts: demo
+  become: true
+  roles:
+  - lamp
