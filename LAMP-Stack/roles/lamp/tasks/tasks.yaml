@@ -66,3 +66,4 @@
   template:
     src: "info.php.j2"
     dest: "/var/www/{{ http_host }}/info.php"
+

@@ -1,5 +1,5 @@
 ---
-mysql_root_password: "testpwd"
+mysql_root_password: "wezvatech"
 app_user: "ubuntu"
 http_host: "your_domain"
 http_conf: "your_domain.conf"
