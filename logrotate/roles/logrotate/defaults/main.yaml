@@ -1,0 +1,26 @@
+---
+  logrotate_conf_dir: "/etc/logrotate.d/"
+  logrotate_scripts:
+    - name: sarmistha
+      log_dir: '/var/log/sarmistha'
+      log_extension: 'log'
+      options:
+        - rotate 7
+        - weekly
+        - size 10M
+        - missingok
+        - compress
+        - create 0644 ubuntu ubuntu
+      scripts:
+        postrotate: "rm /var/log/*.log  2>/dev/null || true"
+    - name: tempo
+      log_dir: '/tempo'
+      log_extension: '*'
+      options:
+        - su root root
+        - rotate 1
+        - daily
+        - size 100M
+        - missingok
+        - compress
+        - create 0777 root root
