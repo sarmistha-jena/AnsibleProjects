@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  become: yes
+  connection: local
+  vars:
+    - ag: /usr/bin/ansible-galaxy
+  pre_tasks:
+    - name: Check Ansible version > 2.10
+      fail: msg="Ansible version should be >= 2.10 to run this playbook, current version is {{ansible_version.string}}"
+      when: ansible_version.minor < 10
+    - name: Check if ansible-galaxy collections are installed
+      shell: "{{ag}} collection list | grep community.general"
+      register: result
+      ignore_errors: true
+    - name: Install Galaxy collections
+      shell: "{{ag}} collection install {{item}}"
+      with_items:
+        - community.general
+        - ansible.posix
+      when: result.rc != 0
+  tasks:
+    # this method negets the static pre-processing of the necessary galaxy collections used in the task
+    - name: Execute test
+      include_role: name=test
