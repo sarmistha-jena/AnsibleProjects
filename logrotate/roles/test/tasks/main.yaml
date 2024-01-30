@@ -1,6 +1,6 @@
 - name: Create a dummy file
   community.general.filesize:
-    path: /tmp/test.log
+    path: /tempo/test.log
     size: 100m
 - name: Run Logrotate
   command: logrotate -f /etc/logrotate.d/tempo
