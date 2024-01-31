@@ -9,7 +9,7 @@
       fail: msg="Ansible version should be >= 2.10 to run this playbook, current version is {{ansible_version.string}}"
       when: ansible_version.minor < 10
     - name: Check if ansible-galaxy collections are installed
-      shell: "{{ag}} collection list | grep community.general"
+      shell: "{{ag}} collection list | grep geerlingguy"
       register: result
       ignore_errors: true
     - name: Install Galaxy collections
