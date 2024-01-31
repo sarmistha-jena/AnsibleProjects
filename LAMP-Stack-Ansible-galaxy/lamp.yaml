@@ -20,6 +20,6 @@
         - geerlingguy.php
       when: result.rc != 0
   roles:
-    - geerlingguy.mysql
-    - geerlingguy.apache
-    - geerlingguy.php
+    - name: geerlingguy.mysql
+    - name: geerlingguy.apache
+    - name: geerlingguy.php
