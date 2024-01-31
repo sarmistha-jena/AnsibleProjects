@@ -20,8 +20,8 @@
         - geerlingguy.php
       when: result.rc != 0
   tasks:
-    - name: Install LAMP(Linux, Apache, Mysql, PHP)
-      include_role:
+    - include_role:
         - geerlingguy.mysql
         - geerlingguy.apache
         - geerlingguy.php
+      name: Install LAMP(Linux, Apache, Mysql, PHP)
