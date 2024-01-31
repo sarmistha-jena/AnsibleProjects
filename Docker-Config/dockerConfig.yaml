@@ -14,13 +14,15 @@
 
     - name: Add user to docker group
       user: name=ubuntu group=docker state=present
+      register: userDetails
+
+    - debug: var=userDetails.stdout
 
     - name: Get Docker info
       block:
         - name: Get Docker info as ubuntu
           command: docker info
           register: output
-        - debug: var=output
         - debug: var=output.stdout
         - debug: var=output.rc
       become_user: ubuntu
