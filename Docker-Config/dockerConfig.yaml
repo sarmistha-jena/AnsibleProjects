@@ -14,9 +14,6 @@
 
     - name: Add user to docker group
       user: name=ubuntu group=docker state=present
-      register: userDetails
-
-    - debug: var=userDetails.group
 
     - name: Get Docker info
       block:
