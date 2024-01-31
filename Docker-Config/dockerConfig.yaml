@@ -16,7 +16,7 @@
       user: name=ubuntu group=docker state=present
       register: userDetails
 
-    - debug: var=userDetails.stdout
+    - debug: var=userDetails.group
 
     - name: Get Docker info
       block:
