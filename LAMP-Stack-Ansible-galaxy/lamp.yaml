@@ -20,6 +20,7 @@
         - geerlingguy.php
       when: result.rc != 0
   tasks:
+    - name: hello
     - include_role:
         - geerlingguy.mysql
         - geerlingguy.apache
