@@ -15,8 +15,9 @@
     - name: Install Galaxy collections
       shell: "{{ag}} collection install {{item}}"
       with_items:
-        - community.general
-        - ansible.posix
+        - geerlingguy.apache
+        - geerlingguy.mysql
+        - geerlingguy.php
       when: result.rc != 0
   tasks:
     - name: Install LAMP(Linux, Apache, Mysql, PHP)
