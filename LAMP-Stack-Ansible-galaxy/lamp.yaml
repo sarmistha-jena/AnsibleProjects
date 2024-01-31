@@ -20,8 +20,12 @@
         - geerlingguy.php
       when: result.rc != 0
   tasks:
-    - name: Execute test
+    - name: Install mysql
       include_role:
-        - name: geerlingguy.mysql
-        - name: geerlingguy.apache
-        - name: geerlingguy.php
+        name: geerlingguy.mysql
+    - name: Install apache
+      include_role:
+        name: geerlingguy.apache
+    - name: Install php
+      include_role:
+        name: geerlingguy.php
