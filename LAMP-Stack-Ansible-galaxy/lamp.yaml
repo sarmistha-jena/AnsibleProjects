@@ -21,5 +21,4 @@
       when: result.rc != 0
   tasks:
     - name: Install LAMP(Linux, Apache, Mysql, PHP)
-      include_role:
-          geerlingguy.mysql
+      include_role: name=geerlingguy.mysql
