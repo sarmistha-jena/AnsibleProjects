@@ -13,13 +13,15 @@
       register: result
       ignore_errors: true
     - name: Install Galaxy collections
-      shell: "{{ag}} collection install {{item}}"
+      shell: "{{ag}} collection install -p roles {{item}}"
       with_items:
         - geerlingguy.apache
         - geerlingguy.mysql
         - geerlingguy.php
       when: result.rc != 0
-  roles:
-    - name: geerlingguy.mysql
-    - name: geerlingguy.apache
-    - name: geerlingguy.php
+  tasks:
+    - name: Execute test
+      include_role:
+        - geerlingguy.mysql
+        - geerlingguy.apache
+        - geerlingguy.php
