@@ -17,9 +17,10 @@
 
     - name: Get Docker info
       block:
-        command: docker info
-        register: output
-          - debug: var=output
-          - debug: var=output.stdout
-          - debug: var=output.rc
-        become_user: ubuntu
+        - name: Get Docker info as ubuntu
+          command: docker info
+          register: output
+        - debug: var=output
+        - debug: var=output.stdout
+        - debug: var=output.rc
+      become_user: ubuntu
