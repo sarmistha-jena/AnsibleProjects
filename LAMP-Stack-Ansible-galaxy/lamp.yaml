@@ -13,7 +13,7 @@
       register: result
       ignore_errors: true
     - name: Install Galaxy collections
-      shell: "{{ag}} collection install -p roles {{item}}"
+      shell: "{{ag}} collection install -p roles/ {{item}}"
       with_items:
         - geerlingguy.apache
         - geerlingguy.mysql
