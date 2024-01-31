@@ -22,6 +22,4 @@
   tasks:
     - name: Install LAMP(Linux, Apache, Mysql, PHP)
       include_role:
-        - geerlingguy.mysql
-        - geerlingguy.apache
-        - geerlingguy.php
+          geerlingguy.mysql
