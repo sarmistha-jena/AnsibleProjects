@@ -19,6 +19,7 @@
         - geerlingguy.mysql
         - geerlingguy.php
       when: result.rc != 0
-  tasks:
-    - name: Install LAMP(Linux, Apache, Mysql, PHP)
-      import_role: name=geerlingguy.mysql
+  roles:
+    - geerlingguy.mysql
+    - geerlingguy.apache
+    - geerlingguy.php
