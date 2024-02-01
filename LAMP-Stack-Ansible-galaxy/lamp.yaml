@@ -21,7 +21,7 @@
       when: result.rc != 0
   tasks:
     - name: Install mysql
-      include_role:
+      import_role:
         name: geerlingguy.mysql
     - name: Install apache
       include_role:
