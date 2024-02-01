@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  become: yes
+  connection: local
+  tasks:
+    - name: Print msg
+      debug:
+        msg: "This is include YAML!!"
+    - name: Include task
+      include_tasks : basic.yaml

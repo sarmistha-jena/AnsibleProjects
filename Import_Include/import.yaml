@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  become: yes
+  connection: local
+  tasks:
+    - name: Print msg
+      debug:
+        msg: "This is import YAML!!"
+    - name: Import task
+      import_tasks : basic.yaml
