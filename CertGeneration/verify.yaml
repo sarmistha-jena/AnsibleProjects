@@ -17,8 +17,8 @@
       openssl_certificate_info:
         path: "{{ item.path }}"
         valid_at:
-          point_1: "+5w"
-          point_2: "+15w"
+          point_1: "+5m"
+          point_2: "+15m"
       register: cert_info
       loop: "{{ find_result.files }}"
 
