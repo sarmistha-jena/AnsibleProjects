@@ -32,7 +32,7 @@
     owner: root
     group: root
     mode: '0644'
-  register: not index_exists.stat.exists
+  when: not index_exists.stat.exists
 
 - name: Verify CA serial file exists
   stat:
@@ -44,7 +44,7 @@
     path: "/etc/pki/CA/serial"
     content: '1000'
     mode: '0644'
-  register: not serial_exists.stat.exists
+  when: not serial_exists.stat.exists
 
 - name: Verify CA CRLNumber file exists(CRL- Certificate revocation list)
   stat:
@@ -56,7 +56,7 @@
     path: "/etc/pki/CA/crlnumber"
     content: '1000'
     mode: '0644'
-  register: not crlnumber_exists.stat.exist
+  when: not crlnumber_exists.stat.exist
 
 - name: Create CA root key
   community.crypto.openssl_privatekey:
