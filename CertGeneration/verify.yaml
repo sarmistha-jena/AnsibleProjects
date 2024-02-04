@@ -20,9 +20,10 @@
           point_1: "+5m"
           point_2: "+15m"
       register: cert_info
-      debug:
-        msg: cert_info.valid_at
       loop: "{{ find_result.files }}"
+
+    - debug:
+        msg: cert_info.valid_at
 
     - name: Filter out valid certs
       set_fact:
