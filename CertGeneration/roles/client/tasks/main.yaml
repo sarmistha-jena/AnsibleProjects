@@ -37,6 +37,6 @@
     ownca_path: /etc/pki/CA/certs/ca.cert.pem
     ownca_privatekey_path: /etc/pki/CA/private/ca.key.pem
     ownca_privatekey_passphrase: "{{ rootca_password }}"
-    ownca_not_after: +15m
+    ownca_not_after: +25m
     mode: '0444'
     state: "{{ clientcert_state }}"
