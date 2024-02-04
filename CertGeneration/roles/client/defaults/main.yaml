@@ -1,0 +1,18 @@
+---
+# Client common name (CN)
+clientcert_hostname: "mysite"
+
+# Client country name
+clientcert_country: ""
+
+# Client email address
+clientcert_email: "{{ omit }}"
+
+# Client state or province name
+clientcert_state_or_province: ""
+
+# Client organization
+clientcert_org: ""
+
+# Client certificate state
+clientcert_state: present

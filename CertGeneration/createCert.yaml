@@ -1,0 +1,29 @@
+---
+- hosts: localhost
+  become: yes
+  connection: local
+  vars:
+    - ag: /usr/bin/ansible-galaxy
+  pre_tasks:
+    - name: Check if ansible-galaxy collections are installed
+      shell: "{{ag}} collection list | grep community.crypto"
+      register: result
+      ignore_errors: true
+    - name: Install Galaxy collections
+      shell: "{{ag}} collection install {{item}}"
+      with_items:
+        - community.crypto
+      when: result.rc != 0
+    - name: Check if Root CA certificate exists
+      stat:
+        path: /etc/pki/CA/certs/ca.cert.pem
+      register: ca
+    - name: Check if Client certificate exists
+      stat:
+        path: /etc/pki/CA/certs/{{clientcert_hostname}}.cert.pem
+      register: client
+  roles:
+    - role: root
+      when: ca.stat.exists != true
+    - role: client
+      when: client.stat.exists != true

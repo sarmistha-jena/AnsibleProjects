@@ -1,0 +1,12 @@
+
+rootca_country: ""
+
+rootca_email: "{{ omit }}"
+
+rootca_state_or_province: ""
+
+rootca_org: ""
+
+rootca_password: "testpassword"
+
+rootca_state: present

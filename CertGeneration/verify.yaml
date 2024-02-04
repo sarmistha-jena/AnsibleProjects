@@ -1,0 +1,42 @@
+---
+- name: find certificate files & expiration dates
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Find cert files under /etc/pki/CA/certs/
+      find:
+        paths: /etc/pki/CA/certs
+        file_type: file
+        patterns: "*.pem"
+        recurse: yes
+        excludes: "localhost.*"
+      register: find_result
+
+    - name: Check validity
+      openssl_certificate_info:
+        path: "{{ item.path }}"
+        valid_at:
+          point_1: "+1w"
+          point_2: "+4w"
+      register: cert_info
+      loop: "{{ find_result.files }}"
+
+    - name: Filter out valid certs
+      set_fact:
+        outdated_certs: "{{ cert_info | json_query('results[? !(valid_at.point_1) || !(valid_at.point_2)]') }}"
+
+    - block:
+        - name: Check that all certificates are valid
+          assert:
+            that:
+              - outdated_certs | count == 0
+
+      rescue:
+        - name: Show info about outdated certs
+          debug:
+            msg: >-
+              {{ { "Outdated Certs": outdated_certs | json_query("[].item.path") } }}
+
+        - fail:
+            msg: "Outdated certs found. See list above"

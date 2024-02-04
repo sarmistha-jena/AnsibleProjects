@@ -1,0 +1,42 @@
+---
+
+- name: Create Client private key
+  community.crypto.openssl_privatekey:
+    path: /etc/pki/CA/private/{{ clientcert_hostname }}.key.pem
+    mode: '0400'
+    state: "{{ clientcert_state }}"
+
+- name: Create Client CSR
+  community.crypto.openssl_csr:
+    path: /etc/pki/CA/csr/{{ clientcert_hostname }}.cert.csr
+    privatekey_path: /etc/pki/CA/private/{{ clientcert_hostname }}.key.pem
+    common_name: "{{ clientcert_hostname }}"
+    country_name: "{{ clientcert_country }}"
+    email_address: "{{ clientcert_email }}"
+    state_or_province_name: "{{ clientcert_state_or_province }}"
+    organization_name: "{{ clientcert_org }}"
+    key_usage:
+      - nonRepudiation
+      - digitalSignature
+      - keyEncipherment
+      - keyAgreement
+    key_usage_critical: true
+    extended_key_usage:
+      - serverAuth
+    extended_key_usage_critical: true
+    digest: sha256
+    subject_alt_name:
+      - "DNS:{{ clientcert_hostname }}"
+
+- name: Generate CLIENT certificate
+  community.crypto.x509_certificate:
+    path: /etc/pki/CA/certs/{{ clientcert_hostname }}.cert.pem
+    privatekey_path: /etc/pki/CA/private/{{ clientcert_hostname }}.key.pem
+    csr_path: /etc/pki/CA/csr/{{ clientcert_hostname }}.cert.csr
+    provider: ownca
+    ownca_path: /etc/pki/CA/certs/ca.cert.pem
+    ownca_privatekey_path: /etc/pki/CA/private/ca.key.pem
+    ownca_privatekey_passphrase: "{{ rootca_password }}"
+    ownca_not_after: +5m
+    mode: '0444'
+    state: "{{ clientcert_state }}"

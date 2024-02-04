@@ -1,0 +1,97 @@
+---
+- name: Create directories
+  file:
+    path: "/etc/pki/CA/{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - certs
+    - crl
+    - newcerts
+    - csr
+
+- name: Create private directory
+  file:
+    path: "/etc/pki/CA/private"
+    state: directory
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Verify index.txt file exists
+  stat:
+    path: /etc/pki/CA/index.txt
+  register: index_exists
+
+- name: Create index.txt file
+  file:
+    path: "/etc/pki/CA/index.txt"
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  register: not index_exists.stat.exists
+
+- name: Verify CA serial file exists
+  stat:
+    path: /etc/pki/CA/serial
+  register: serial_exists
+
+- name: Create CA serial file
+  file:
+    path: "/etc/pki/CA/serial"
+    content: '1000'
+    mode: '0644'
+  register: not serial_exists.stat.exists
+
+- name: Verify CA CRLNumber file exists(CRL- Certificate revocation list)
+  stat:
+    path: /etc/pki/CA/crlnumber
+  register: crlnumber_exists
+
+- name: Create CA CRLNumber file
+  file:
+    path: "/etc/pki/CA/crlnumber"
+    content: '1000'
+    mode: '0644'
+  register: not crlnumber_exists.stat.exist
+
+- name: Create CA root key
+  community.crypto.openssl_privatekey:
+    path: /etc/pki/CA/private/ca.key.pem
+    ciper: auto
+    select_crypto_backend: auto
+    passphrase: "{{ rootca_password }}"
+    mode: '0400'
+    state: "{{ rootca_state }}"
+
+- name: Create ROOT Self-signed CSR
+  community.crypto.openssl_csr:
+    path: /etc/pki/CA/csr/ca.cert.csr
+    privatekey_path: /etc/pki/CA/private/ca.key.pem
+    privatekey_passphrase: "{{ rootca_password }}"
+    common_name: Certificate Authority
+    use_common_name_for_san: false
+    basic_constraints:
+      - 'CA:TRUE'
+    basic_constraints_critical: true
+    key_usage:
+      - keyCertSign
+    key_usage_critical: true
+    country_name: "{{ rootca_country }}"
+    email_address: "{{ rootca_email }}"
+    state_or_province_name: "{{ rootca_state_or_province }}"
+    organization_name: "{{ rootca_org }}"
+    digest: sha256
+
+- name: Generate ROOT Self-signed certificate
+  community.crypto.x509_certificate:
+    path: /etc/pki/CA/certs/ca.cert.pem
+    privatekey_path: /etc/pki/CA/private/ca.key.pem
+    csr_path: /etc/pki/CA/csr/ca.cert.csr
+    privatekey_passphrase: "{{ rootca_password }}"
+    provider: selfsigned
+    mode: '0444'
+    state: "{{ rootca_state }}"
