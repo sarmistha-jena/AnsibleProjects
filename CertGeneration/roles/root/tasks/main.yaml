@@ -40,8 +40,8 @@
   register: serial_exists
 
 - name: Create CA serial file
-  file:
-    path: "/etc/pki/CA/serial"
+  copy:
+    dest: "/etc/pki/CA/serial"
     content: '1000'
     mode: '0644'
   when: not serial_exists.stat.exists
@@ -52,8 +52,8 @@
   register: crlnumber_exists
 
 - name: Create CA CRLNumber file
-  file:
-    path: "/etc/pki/CA/crlnumber"
+  copy:
+    dest: "/etc/pki/CA/crlnumber"
     content: '1000'
     mode: '0644'
   when: not crlnumber_exists.stat.exist
