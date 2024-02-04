@@ -61,7 +61,7 @@
 - name: Create CA root key
   community.crypto.openssl_privatekey:
     path: /etc/pki/CA/private/ca.key.pem
-    ciper: auto
+    cipher: auto
     select_crypto_backend: auto
     passphrase: "{{ rootca_password }}"
     mode: '0400'
