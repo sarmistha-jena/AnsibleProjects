@@ -23,7 +23,10 @@
       loop: "{{ find_result.files }}"
 
     - debug:
-        var: cert_info
+        var: cert_info.valid_at.point_1
+
+    - debug:
+        var: cert_info.valid_at.point_2
 
     - name: Filter out valid certs
       set_fact:
