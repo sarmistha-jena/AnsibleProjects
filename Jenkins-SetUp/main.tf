@@ -11,7 +11,7 @@ provider "aws" {
 }
 
 #Create Master machine
-resource "aws_instance" "ansible_node" {
+resource "aws_instance" "jenkins_master" {
   count                       = 1
   ami                         = "ami-0ef82eeba2c7a0eeb"
   instance_type               = "t2.micro"
