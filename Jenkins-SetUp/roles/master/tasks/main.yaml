@@ -1,0 +1,25 @@
+---
+- name: Apt Update repositories cache
+  apt:
+    update_cache: yes
+
+- name: Install java-JRE
+  package: name=openjdk-11-jre state=present
+
+- name: Add the repository key to the system
+  apt_key:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+    state: present
+
+- name: Append the Debian package repository
+  shell: sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+- name: Apt Update repositories cache
+  apt:
+    update_cache: yes
+
+- name: Install jenkins
+  package: name=jenkins  state=present
+
+- name: Start jenkins service
+  service: name=jenkins state=started
