@@ -3,5 +3,5 @@
   apt:
     update_cache: yes
 
-- name: Install java-JRE
-  package: name=openjdk-11-jre state=present
+- name: Install java-JDK
+  package: name=openjdk-11-jdk state=present
