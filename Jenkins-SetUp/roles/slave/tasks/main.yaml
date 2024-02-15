@@ -4,4 +4,4 @@
     update_cache: yes
 
 - name: Install java-JDK
-  package: name=openjdk-11-jdk state=present
+  package: name=openjdk-17-jdk state=present

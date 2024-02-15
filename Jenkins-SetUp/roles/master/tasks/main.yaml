@@ -4,7 +4,10 @@
     update_cache: yes
 
 - name: Install java-JRE
-  package: name=openjdk-11-jre state=present
+  package: name=openjdk-17-jre state=present
+
+- name: Install fontconfig
+  package: name=fontconfig  state=present
 
 - name: Add the repository key to the system
   apt_key:
