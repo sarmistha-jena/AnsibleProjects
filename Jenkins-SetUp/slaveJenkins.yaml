@@ -1,5 +1,5 @@
 ---
-- hosts: slave
+- hosts: slaves
   become: true
   roles:
     - slave
