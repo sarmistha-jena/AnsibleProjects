@@ -1,0 +1,17 @@
+- hosts: terra
+  become: true
+  tasks:
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+        upgrade: yes
+    - name: Add stable python version from repo
+      apt_repository: repo="ppa:deadsnakes/ppa"
+    - name: Install necessary packages
+      apt: name="{{item}}" state=present
+      loop:
+        - software-properties-common
+        - python3.7
+        - python3-pip
+    - name: Install checkov
+      command: python3 -m pip install -U checkov
