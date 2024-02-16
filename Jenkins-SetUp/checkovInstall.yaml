@@ -4,7 +4,6 @@
     - name: Update apt packages
       apt:
         update_cache: yes
-        upgrade: yes
     - name: Add stable python version from repo
       apt_repository: repo="ppa:deadsnakes/ppa"
     - name: Install necessary packages
