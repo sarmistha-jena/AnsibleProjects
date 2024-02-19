@@ -3,10 +3,10 @@
     update_cache: yes
 
 - name: Install docker.io
-  package: name= {{ item }} state=present
-  loop:
-    - docker.io
-    - docker-compose
+  package: name=docker.io state=present
+
+- name: Install docker compose
+  package: name= docker-compose state=present
 
 - name: Start docker service
   service: name=docker state=started
