@@ -6,7 +6,7 @@
   package: name=docker.io state=present
 
 - name: Install docker compose
-  package: name= docker-compose state=present
+  package: name=docker-compose state=present
 
 - name: Start docker service
   service: name=docker state=started
