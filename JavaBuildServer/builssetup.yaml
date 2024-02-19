@@ -1,0 +1,7 @@
+---
+- hosts: demo
+  become: yes
+  roles:
+    - maven
+    - docker
+    - awscli

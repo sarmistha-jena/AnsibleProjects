@@ -1,0 +1,13 @@
+- name: Apt Update repositories cache
+  apt:
+    update_cache: yes
+
+- name: Install docker.io
+  package: name= {{ item }} state=present
+  loop: ['docker.io', 'docker-compose']
+
+- name: Start docker service
+  service: name=docker state=started
+
+- name: Add user to docker group
+  user: name=ubuntu group=docker state=present

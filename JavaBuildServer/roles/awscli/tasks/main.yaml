@@ -1,0 +1,11 @@
+- name: Install Python PIP
+  package: pkg=python3-pip state=latest
+
+- name: Install boto via PIP
+  pip: name=boto state=latest
+
+- name: Install AWS CLI
+  pip: name=awscli state=latest
+
+- name: Install JQ
+  package: name=jq state=latest

@@ -1,0 +1,6 @@
+---
+maven_major: 3
+maven_version: 3.9.5
+maven_home_parent_directory: /opt/downloads
+maven_file_name: apache-maven-{{ maven_version }}-bin.tar.gz
+maven_download_url: http://www.apache.org/dist/maven/maven-{{ maven_major }}/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz
