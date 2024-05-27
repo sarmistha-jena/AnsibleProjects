@@ -1,0 +1,35 @@
+---
+- hosts: all
+  gather_facts: true
+  become: yes
+  tasks:
+    - name: Create devops group
+      group:
+        name: devops
+        state: present
+    - name: Create devops user
+      user:
+        name: devops
+        state: present
+        group: "devops, sudo"
+
+    - name: Install the "htop" utility
+      apt:
+        name: htop
+        state: present
+...
+---
+- hosts: webserver1
+  user: ubuntu
+  become: yes
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: latest
+    - name: Start nginx service
+      service:
+        name: nginx
+        state: started
+
+

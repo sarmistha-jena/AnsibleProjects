@@ -1,0 +1,7 @@
+[webserver]
+webserver1 ansible_host=172.31.46.56 ansible_user=ubuntu ansible_ssh_key_file=/home/ubuntu/linux-pract1.pem
+webserver2 ansible_host=172.31.37.49 ansible_user=ubuntu ansible_ssh_key_file=/home/ubuntu/linux-pract1.pem
+[database]
+
+[www]
+lb1 ansible_host=172.31.33.179 ansible_user=ubuntu ansible_ssh_key_file=/home/ubuntu/linux-pract1.pem

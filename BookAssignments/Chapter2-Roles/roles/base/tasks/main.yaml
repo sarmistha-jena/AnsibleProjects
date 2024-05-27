@@ -1,0 +1,14 @@
+- name: Create devops group
+  group:
+    name: devops
+    state: present
+- name: Create devops user
+  user:
+    name: devops
+    state: present
+    group: "devops, sudo"
+
+- name: Install the "htop" utility
+  apt:
+    name: htop
+    state: present
