@@ -4,4 +4,7 @@ webserver2 ansible_host=172.31.37.49 ansible_user=ubuntu ansible_ssh_private_key
 [database]
 
 [www]
-lb1 ansible_host=172.31.37.49 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/linux-pract1.pem
+lb1 ansible_host=172.31.47.69 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/linux-pract1.pem
+
+[db]
+db1 ansible_host=172.31.37.192 ansible_user=ubuntu ansible_ssh_private_key_file=/home/ubuntu/linux-pract1.pem

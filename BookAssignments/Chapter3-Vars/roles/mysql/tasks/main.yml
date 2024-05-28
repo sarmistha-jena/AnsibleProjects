@@ -1,2 +1,29 @@
 ---
-# tasks file for mysql
+## This is main tasks file for mysql role
+## filename: roles/mysql/tasks/main.yml
+## Load vars specific to OS Family.
+#- include_vars: "{{ ansible_os_family }}.yml"
+#  when: ansible_os_family != 'Debian'
+#- include: install_RedHat.yml
+#  when: ansible_os_family == 'RedHat'
+#- include: install_Debian.yml
+#  when: ansible_os_family == 'Debian'
+
+# filename: roles/mysql/tasks/install_Debian.yml
+#ansible -i customhosts www -m setup | less
+- name: install mysql server
+  apt:
+    name:"{{ mysql_pkg }}"
+    update_cache:yes
+  when: ansible_os_family != 'Debian'
+- name: install mysql server
+  yum:
+    name:"{{ mysql_pkg }}"
+    update_cache:yes
+  when: ansible_os_family == "RedHat"
+- name: create mysql config
+  template: src="my.cnf.j2" dest="{{ mysql_cnfpath }}" mode=0644
+  notify:
+    - restart mysql service
+- name: start mysql server
+  service: name="{{ mysql_service }}" state=started
