@@ -21,9 +21,9 @@
     name:"{{ mysql_pkg }}"
     update_cache:yes
   when: ansible_os_family == "RedHat"
-#- name: create mysql config
-#  template: src="my.cnf.j2" dest="{{ mysql_cnfpath }}" mode=0644
-#  notify:
-#    - restart mysql service
+- name: create mysql config
+  template: src="my.cnf.j2" dest="{{ mysql_cnfpath }}" mode=0644
+  notify:
+    - restart mysql service
 - name: ensure mysql is enabled to run on startup
   service: name=mysql state=started enabled=true
