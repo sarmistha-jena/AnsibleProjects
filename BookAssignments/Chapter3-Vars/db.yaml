@@ -1,5 +1,5 @@
 ---
-- hosts: www
+- hosts: db
   user: ubuntu
   become: yes
   roles:
