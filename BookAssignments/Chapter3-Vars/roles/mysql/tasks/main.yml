@@ -13,7 +13,7 @@
 #ansible -i customhosts www -m setup | less
 - name: install mysql server
   apt:
-    name:"{{ mysql_pkg }}"
+    name:"{{ mysql_pkg }}" update_cache=yes state=latest
     update_cache:yes
   when: ansible_os_family == 'Debian'
 - name: install mysql server
@@ -21,9 +21,9 @@
     name:"{{ mysql_pkg }}"
     update_cache:yes
   when: ansible_os_family == "RedHat"
-- name: create mysql config
-  template: src="my.cnf.j2" dest="{{ mysql_cnfpath }}" mode=0644
-  notify:
-    - restart mysql service
-- name: start mysql server
-  service: name="{{ mysql_service }}" state=started
+#- name: create mysql config
+#  template: src="my.cnf.j2" dest="{{ mysql_cnfpath }}" mode=0644
+#  notify:
+#    - restart mysql service
+- name: ensure mysql is enabled to run on startup
+  service: name=mysql state=started enabled=true
