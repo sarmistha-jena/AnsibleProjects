@@ -3,4 +3,4 @@
   user: ubuntu
   become: yes
   roles:
-    - { role: mysql, mysql_bind: "{{ ansible_eth1.ipv4.address}}" }
+    - { role: mysql, mysql_bind: "{{ ansible_enX0.ipv4.address}}" }
