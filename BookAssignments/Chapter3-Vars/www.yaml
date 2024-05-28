@@ -1,0 +1,13 @@
+---
+- hosts: www
+  user: ubuntu
+  become: yes
+  pre_tasks:
+    - shell: echo 'I":" Beginning to configure web server..'
+  roles:
+      - nginx
+  post_tasks:
+      - shell: echo 'I":" Done configuring nginx web server...'
+
+#  roles:
+#    - { role: nginx, port: 8080 }
