@@ -1,0 +1,16 @@
+---
+- name: Deploy SSH key
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure .ssh directory exists
+      file:
+        path: "~/.ssh"
+        state: directory
+        mode: '0700'
+
+    - name: Copy public key to authorized_keys
+      authorized_key:
+        user: "ubuntu"
+        state: present
+        key: "{{ lookup('file', '/home/ubuntu/.ssh/id_rsa.pub') }}"
